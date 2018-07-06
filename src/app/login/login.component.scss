@@ -1,0 +1,93 @@
+header {
+  padding: 2rem 1rem;
+}
+
+h1 {
+  font-weight: 500;
+  margin: 0;
+}
+
+h3 {
+  font-weight: 400;
+  margin: 1rem;
+}
+
+.greeting {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-form {
+  background-color: white;
+  border-radius: 3px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.08), inset 0 0 0 1px gainsboro;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem;
+  margin: 2rem auto;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-weight: 400;
+    margin-bottom: 5px;
+  }
+
+  & + & {
+    margin-top: 1rem;
+  }
+
+  .field-error {
+    margin: 5px 0;
+    color: #f44336;
+    font-weight: 400;
+  }
+
+  input {
+    background-color: #f7f9fa;
+    border: 1px solid #dbe3e7;
+    border-radius: 3px;
+    color: #536171;
+    padding: 0 10px;
+    min-height: 38px;
+    font-size: 14px;
+  }
+}
+
+.login-button {
+  width: 100%;
+  margin-top: 2rem;
+  background: linear-gradient(0deg, #3c80cf 0%, #5b9fef 100%) no-repeat;
+  background-size: 100% 200%;
+  border: none;
+  color: white;
+  font-size: 16px;
+  padding: 12px 18px;
+  cursor: pointer;
+  border-radius: 3px;
+  font-weight: 400;
+
+  &[disabled] {
+    opacity: 0.5;
+  }
+}
+
+.form-error {
+  background-color: #fcf8e3;
+  border: 1px solid #faebcc;
+  border-radius: 3px;
+  color: #76674e;
+  display: block;
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 8px 10px;
+  font-weight: normal;
+}

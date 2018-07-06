@@ -1,0 +1,29 @@
+<header>
+  <img src="assets/todomvc-logo.svg" alt="TodoMVC Logo">
+</header>
+<main>
+  <div class="greeting">
+    <h1>Welcome back!</h1>
+    <h3>Log in to your account to get started</h3>
+  </div>
+  <form class="login-form" [formGroup]="loginForm" (ngSubmit)="login()">
+    <div class="input-container">
+      <label for="username">Username</label>
+      <input id="username" type="text" formControlName="username">
+      <p class="field-error" *ngIf="!loginForm.get('username').pristine && loginForm.get('username').hasError('required')">
+        Please enter your username.
+      </p>
+    </div>
+    <div class="input-container">
+      <label for="password">Password</label>
+      <input id="password" type="password" formControlName="password">
+      <p class="field-error" *ngIf="!loginForm.get('password').pristine && loginForm.get('password').hasError('required')">
+        Please enter your password.
+      </p>
+    </div>
+    <p class="form-error" *ngIf="loginError">
+      {{ loginError }}
+    </p>
+    <button class="login-button" [disabled]="!loginForm.valid">Login</button>
+  </form>
+</main>

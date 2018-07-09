@@ -7,12 +7,6 @@ describe('Login', () => {
   });
 
   beforeEach(() => {
-    cy.get('input#username').as('username');
-    cy.get('input#password').as('password');
-    cy.get('.login-button').as('loginButton');
-  });
-
-  beforeEach(() => {
     cy.server();
     cy.route('POST', '/auth/login').as('login');
   });
@@ -24,62 +18,62 @@ describe('Login', () => {
   it('should contain username and password field', () => {
     const defaultClasses = 'ng-untouched ng-pristine ng-invalid';
 
-    cy.get('@username')
+    cy.getByTestId('username')
       .should('have.class', defaultClasses)
       .prev()
       .contains('Username');
 
-    cy.get('@password')
+    cy.getByTestId('password')
       .should('have.class', defaultClasses)
       .prev()
       .contains('Password');
   });
 
   it('should be initially disabled', () => {
-    cy.get('@loginButton')
+    cy.getByTestId('login-button')
       .should('be.disabled')
       .and('have.attr', 'disabled');
   });
 
   it('should require username and password', () => {
     const inputs = [
-      { element: '@username', text: 'foo', error: 'Please enter your username.' },
-      { element: '@password', text: 'foo', error: 'Please enter your password.' }
+      { element: 'username', text: 'foo', error: 'Please enter your username.' },
+      { element: 'password', text: 'foo', error: 'Please enter your password.' }
     ];
 
     cy.wrap(inputs).each(input => {
       const { element, text, error } = input;
 
-      cy.get(element)
+      cy.getByTestId(element)
         .type(text)
         .should('have.value', text);
 
-      cy.get(element)
+      cy.getByTestId(element)
         .clear()
         .blur();
 
-      cy.get(element).should('have.class', 'ng-dirty ng-invalid ng-touched');
+      cy.getByTestId(element).should('have.class', 'ng-dirty ng-invalid ng-touched');
 
-      cy.get(element)
+      cy.getByTestId(element)
         .next('.field-error')
         .contains(error);
     });
   });
 
   it('requires valid username and password', () => {
-    cy.get('@username')
+    cy.getByTestId('username')
       .type('foo')
       .blur();
 
-    cy.get('@password')
+    cy.getByTestId('password')
       .type('foo')
       .blur();
 
-    cy.get('@loginButton')
+    cy.getByTestId('login-button')
       .should('not.be.disabled')
       .and('not.have.attr', 'disabled');
 
-    cy.get('@loginButton').click();
+    cy.getByTestId('login-button').click();
 
     cy.wait('@login');
 
@@ -95,17 +89,17 @@ describe('Login', () => {
   });
 
   it('resets error state when username or password change', () => {
-    cy.get('@username')
+    cy.getByTestId('username')
       .type('foo')
       .blur();
 
-    cy.get('@password')
+    cy.getByTestId('password')
       .type('foo')
       .blur();
 
-    cy.get('@loginButton').click();
+    cy.getByTestId('login-button').click();
 
-    cy.get('@username')
+    cy.getByTestId('username')
       .clear()
       .type('bar')
       .should('have.value', 'bar');
@@ -118,15 +112,15 @@ describe('Login', () => {
   });
 
   it('should set auth token in localStorage on successful login', () => {
-    cy.get('@username')
+    cy.getByTestId('username')
       .type('ppan')
       .blur();
 
-    cy.get('@password')
+    cy.getByTestId('password')
       .type('ppan')
       .blur();
 
-    cy.get('@loginButton').click();
+    cy.getByTestId('login-button').click();
 
     cy.wait('@login');
 
@@ -147,16 +141,16 @@ describe('Login', () => {
     });
   });
 
-  it.only('should redirect to /todos on successful login', () => {
-    cy.get('@username')
+  it('should redirect to /todos on successful login', () => {
+    cy.getByTestId('username')
       .type('ppan')
       .blur();
 
-    cy.get('@password')
+    cy.getByTestId('password')
       .type('ppan')
       .blur();
 
-    cy.get('@loginButton').click();
+    cy.getByTestId('login-button').click();
 
     cy.location().should(location => {
       expect(location.pathname).to.eq('/todos');

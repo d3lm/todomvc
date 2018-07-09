@@ -9,21 +9,21 @@
   <form class="login-form" [formGroup]="loginForm" (ngSubmit)="login()">
     <div class="input-container">
       <label for="username">Username</label>
-      <input id="username" type="text" formControlName="username">
+      <input id="username" data-cy="username" type="text" formControlName="username">
       <p class="field-error" *ngIf="!loginForm.get('username').pristine && loginForm.get('username').hasError('required')">
         Please enter your username.
       </p>
     </div>
     <div class="input-container">
       <label for="password">Password</label>
-      <input id="password" type="password" formControlName="password">
-      <p class="field-error" *ngIf="!loginForm.get('password').pristine && loginForm.get('password').hasError('required')">
+      <input id="password" data-cy="password" type="password" formControlName="password">
+      <p class="field-error" data-cy="field-error" *ngIf="!loginForm.get('password').pristine && loginForm.get('password').hasError('required')">
         Please enter your password.
       </p>
     </div>
-    <p class="form-error" *ngIf="loginError">
+    <p class="form-error" data-cy="form-error" *ngIf="loginError">
       {{ loginError }}
     </p>
-    <button class="login-button" [disabled]="!loginForm.valid">Login</button>
+    <button class="login-button" data-cy="login-button" [disabled]="!loginForm.valid">Login</button>
   </form>
 </main>

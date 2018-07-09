@@ -1,27 +1,27 @@
 <section class="todoapp">
   <header class="header">
     <h1>todos</h1>
-    <input class="new-todo" placeholder="What needs to be done?" #todo [(ngModel)]="newTodo" (keyup.enter)="addTodo(todo.value)"
+    <input class="new-todo" data-cy="new-todo" placeholder="What needs to be done?" #todo [(ngModel)]="newTodo" (keyup.enter)="addTodo(todo.value)"
       autofocus>
   </header>
-  <section *ngIf="todos.length > 0" class="main">
+  <section *ngIf="todos.length > 0" data-cy="main" class="main">
     <input class="toggle-all" id="toggle-all" *ngIf="todos.length > 0" type="checkbox" #inputToggleAll [checked]="allCompleted"
       (click)="toggleAll(inputToggleAll.checked)">
     <label for="toggle-all">Mark all as complete</label>
     <ul class="todo-list" [@staggerTodos]="filteredTodos?.length">
       <li *ngFor="let todo of filteredTodos; trackBy: trackById" data-cy="todo-item" [ngClass]="{'completed' : todo.completed, 'editing': todo == currentTodo}">
         <div class="view">
-          <input class="toggle" type="checkbox" (change)="toggle(todo)" [checked]="todo.completed">
+          <input class="toggle" data-cy="toggle" type="checkbox" (change)="toggle(todo)" [checked]="todo.completed">
           <label *ngIf="currentTodo?.id != todo.id" (dblclick)="edit(todo)">{{todo.title}}</label>
           <button (click)="delete(todo)" data-cy="destroy" class="destroy"></button>
         </div>
-        <input *ngIf="currentTodo == todo" [(ngModel)]="currentTodo.title" (keyup.enter)="update(todo)" (keyup.esc)="cancelEdit()"
+        <input *ngIf="currentTodo == todo" data-cy="edit-todo" [(ngModel)]="currentTodo.title" (keyup.enter)="update(todo)" (keyup.esc)="cancelEdit()"
           class="edit" autofocus>
       </li>
     </ul>
   </section>
-  <footer *ngIf="todos.length > 0" class="footer">
-    <span class="todo-count">
+  <footer *ngIf="todos.length > 0" data-cy="footer" class="footer">
+    <span class="todo-count" data-cy="todo-count">
       <strong>{{remaining}}</strong> item{{remaining !== 1 ? 's' : ''}} left
     </span>
     <ul class="filters">
@@ -46,5 +46,5 @@
   <p>Based on
     <a href="http://todomvc.com">TodoMVC</a>
   </p>
-  <button class="logout-button" (click)="logout()">LOGOUT</button>
+  <button class="logout-button" data-cy="logout" (click)="logout()">LOGOUT</button>
 </footer>

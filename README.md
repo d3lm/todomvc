@@ -20,7 +20,11 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 ## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Run `yarn e2e` to execute the end-to-end tests via [Cypress](https://www.cypress.io/).
+
+## CI
+
+This project is also integrated with [CircleCI](https://circleci.com) and all e2e tests are executed in parallel across multiple CI machines.
 
 ## Further help
 

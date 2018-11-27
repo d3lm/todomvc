@@ -8,7 +8,10 @@
     "build": "ng build",
     "test": "jest",
     "lint": "ng lint",
-    "e2e": "cypress open"
+    "ci:start": "npm run server && npm start",
+    "e2e": "cypress open",
+    "test:ci": "start-server-and-test start http-get://localhost:4200 e2e:ci",
+    "e2e:ci": "cypress run --record --parallel --group $STAGE_NAME"
   },
   "jest": {
     "preset": "jest-preset-angular",
@@ -49,9 +52,10 @@
     "@types/jsonwebtoken": "^7.2.8",
     "@types/node": "^10.5.1",
     "codelyzer": "~4.2.1",
-    "cypress": "^3.0.3",
+    "cypress": "^3.1.2",
     "jest": "^23.3.0",
     "jest-preset-angular": "^5.2.3",
+    "start-server-and-test": "1.7.11",
     "ts-node": "~5.0.1",
     "tslint": "~5.9.1",
     "typescript": "~2.7.2"

@@ -1,0 +1,16 @@
+version: 2.1
+orbs:
+  cypress: cypress-io/cypress@1.0.1
+workflows:
+  build:
+    jobs:
+      - cypress/install
+      - cypress/run:
+          requires:
+            - cypress/install
+          record: true
+          parallel: true
+          parallelism: 4
+          group: '4x-electron'
+          start: 'npm run ci:start'
+          wait-on: 'http-get://localhost:4200'

@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  cypress: cypress-io/cypress@1.0.1
+  cypress: cypress-io/cypress@1.1.0
 workflows:
   build:
     jobs:
@@ -13,4 +13,5 @@ workflows:
           parallel: true
           parallelism: 4
           group: '4x-electron'
-          command: 'npm run test:ci'
+          start: 'ci:start'
+          wait-on: 'http-get://localhost:4200'
